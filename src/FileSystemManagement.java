@@ -1,6 +1,14 @@
 package src;
 
+/**
+ * Manages a file system.
+ */
 public class FileSystemManagement {
+
+  /**
+   * Prints the menu and returns the user's choice.
+   * @return the user's choice
+   */
   private static int printMenu() {
     System.out.println("\033[31m==== File System Management ====\033[0m");
     System.out.println("1. Change directory");
@@ -16,10 +24,19 @@ public class FileSystemManagement {
     return Integer.parseInt(System.console().readLine());
   }
 
+  /**
+   * Manages the file system.
+   */
   private final FileSystem fs;
 
+  /**
+   * Constructs a new FileSystemManagement object.
+   */
   public FileSystemManagement() { fs = new FileSystem(); }
 
+  /**
+   * Runs the file system management program.
+   */
   public void run() {
     boolean exit = false;
     while (!exit) {
@@ -64,6 +81,9 @@ public class FileSystemManagement {
     }
   }
 
+  /**
+   * Changes the current directory.
+   */
   private void changeDirectory() {
     System.out.print("Current directory: ");
     fs.printCurrentPath();
@@ -78,12 +98,18 @@ public class FileSystemManagement {
     }
   }
 
+  /**
+   * Lists the contents of the current directory.
+   */
   private void listDirectoryContents() {
     System.out.print("Listing contents of directory: ");
     fs.printCurrentPath();
     fs.printCurrentChildren();
   }
 
+  /**
+   * Creates a file or directory.
+   */
   private void createFileOrDirectory() {
     System.out.print("Current directory: ");
     fs.printCurrentPath();
@@ -100,6 +126,9 @@ public class FileSystemManagement {
     }
   }
 
+  /**
+   * Deletes a file or directory.
+   */
   private void deleteFileOrDirectory() {
     System.out.print("Current directory: ");
     fs.printCurrentPath();
@@ -113,6 +142,9 @@ public class FileSystemManagement {
     }
   }
 
+  /**
+   * Moves a file or directory.
+   */
   private void moveFileOrDirectory() {
     System.out.print("Current directory: ");
     fs.printCurrentPath();
@@ -128,6 +160,9 @@ public class FileSystemManagement {
     }
   }
 
+  /**
+   * Searches for a file or directory.
+   */
   private void searchFileOrDirectory() {
     System.out.print("Enter name: ");
     final String name = System.console().readLine();
@@ -141,8 +176,14 @@ public class FileSystemManagement {
     }
   }
 
+  /**
+   * Prints the directory tree.
+   */
   private void printDirectoryTree() { fs.printTree(); }
 
+  /**
+   * Sorts the contents of the current directory by date.
+   */
   private void sortContentsByDate() {
     fs.getCurrentDirectory().sort();
     System.out.println("Contents sorted by date");
