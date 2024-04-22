@@ -37,11 +37,11 @@ public abstract class FileSystemElement
 
   public abstract FileSystemElement find(String[] pathParts);
 
-  public Directory findDirectory(String[] pathParts) {
+  public Directory findDirectory(final String[] pathParts) {
     return (Directory)find(pathParts);
   }
 
-  public File findFile(String[] pathParts) { return (File)find(pathParts); }
+  public File findFile(final String[] pathParts) { return (File)find(pathParts); }
 
   public void delete() {
     if (parent == null)
@@ -50,7 +50,7 @@ public abstract class FileSystemElement
     setParent(null);
   }
 
-  public void move(Directory newParent) {
+  public void move(final Directory newParent) {
     if (parent == null)
       return;
     parent.remove(this);
@@ -65,14 +65,14 @@ public abstract class FileSystemElement
 
   public abstract FileSystemElement recFind(String name);
 
-  public void printTree(int level) {
+  public void printTree(final int level) {
     for (int i = 0; i < level; i++)
       System.out.print("  ");
     System.out.println(this);
   }
 
   @Override
-  public int compareTo(FileSystemElement other) {
+  public int compareTo(final FileSystemElement other) {
     return name.compareTo(other.getName());
   }
 }

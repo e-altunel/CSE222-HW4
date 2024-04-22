@@ -1,7 +1,22 @@
 package src;
 
 public class FileSystemManagement {
-  private FileSystem fs;
+  private static int printMenu() {
+    System.out.println("\033[31m==== File System Management ====\033[0m");
+    System.out.println("1. Change directory");
+    System.out.println("2. List directory contents");
+    System.out.println("3. Create file/directory");
+    System.out.println("4. Delete file/directory");
+    System.out.println("5. Move file/directory");
+    System.out.println("6. Search file/directory");
+    System.out.println("7. Print directory tree");
+    System.out.println("8. Sort contents by date");
+    System.out.println("9. Exit");
+    System.out.print("Enter your choice: ");
+    return Integer.parseInt(System.console().readLine());
+  }
+
+  private final FileSystem fs;
 
   public FileSystemManagement() { fs = new FileSystem(); }
 
@@ -11,7 +26,7 @@ public class FileSystemManagement {
       int choice = -1;
       try {
         choice = printMenu();
-      } catch (NumberFormatException e) {
+      } catch (final NumberFormatException e) {
         System.out.println("Invalid choice");
         continue;
       }
@@ -49,31 +64,16 @@ public class FileSystemManagement {
     }
   }
 
-  private static int printMenu() {
-    System.out.println("\033[31m==== File System Management ====\033[0m");
-    System.out.println("1. Change directory");
-    System.out.println("2. List directory contents");
-    System.out.println("3. Create file/directory");
-    System.out.println("4. Delete file/directory");
-    System.out.println("5. Move file/directory");
-    System.out.println("6. Search file/directory");
-    System.out.println("7. Print directory tree");
-    System.out.println("8. Sort contents by date");
-    System.out.println("9. Exit");
-    System.out.print("Enter your choice: ");
-    return Integer.parseInt(System.console().readLine());
-  }
-
   private void changeDirectory() {
     System.out.print("Current directory: ");
     fs.printCurrentPath();
     System.out.print("Enter new directory path: ");
-    String path = System.console().readLine();
+    final String path = System.console().readLine();
     try {
       fs.setCurrentDirectory(path);
       System.out.print("Current directory changed to: ");
       fs.printCurrentPath();
-    } catch (IllegalArgumentException e) {
+    } catch (final IllegalArgumentException e) {
       System.out.println("Invalid path");
     }
   }
@@ -88,9 +88,9 @@ public class FileSystemManagement {
     System.out.print("Current directory: ");
     fs.printCurrentPath();
     System.out.print("Enter name: ");
-    String name = System.console().readLine();
+    final String name = System.console().readLine();
     System.out.print("Create file or directory? (f/d): ");
-    String choice = System.console().readLine();
+    final String choice = System.console().readLine();
     if (choice.equals("f")) {
       fs.createFile(name);
     } else if (choice.equals("d")) {
@@ -104,11 +104,11 @@ public class FileSystemManagement {
     System.out.print("Current directory: ");
     fs.printCurrentPath();
     System.out.print("Enter name: ");
-    String name = System.console().readLine();
+    final String name = System.console().readLine();
     try {
       fs.delete(name);
       System.out.println("Deleted " + name);
-    } catch (IllegalArgumentException e) {
+    } catch (final IllegalArgumentException e) {
       System.out.println("Invalid name");
     }
   }
@@ -117,21 +117,21 @@ public class FileSystemManagement {
     System.out.print("Current directory: ");
     fs.printCurrentPath();
     System.out.print("Enter name: ");
-    String name = System.console().readLine();
+    final String name = System.console().readLine();
     System.out.print("Enter new parent directory path: ");
-    String path = System.console().readLine();
+    final String path = System.console().readLine();
     try {
       fs.move(name, path);
       System.out.println("Moved " + name + " to " + path);
-    } catch (IllegalArgumentException e) {
+    } catch (final IllegalArgumentException e) {
       System.out.println("Invalid name or path");
     }
   }
 
   private void searchFileOrDirectory() {
     System.out.print("Enter name: ");
-    String name = System.console().readLine();
-    FileSystemElement found = fs.recFind(name);
+    final String name = System.console().readLine();
+    final FileSystemElement found = fs.recFind(name);
     if (found != null) {
       System.out.print("Found: ");
       found.printPath();

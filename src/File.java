@@ -6,7 +6,7 @@ public class File extends FileSystemElement {
   }
 
   @Override
-  public FileSystemElement find(String[] pathParts) {
+  public FileSystemElement find(final String[] pathParts) {
     if (pathParts.length != 1)
       return null;
     if (pathParts[0].equals(getName()))
@@ -15,7 +15,7 @@ public class File extends FileSystemElement {
   }
 
   @Override
-  public FileSystemElement recFind(String name) {
+  public FileSystemElement recFind(final String name) {
     if (name.equals(getName()))
       return this;
     return null;

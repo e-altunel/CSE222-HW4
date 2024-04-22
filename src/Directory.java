@@ -34,8 +34,8 @@ public class Directory extends FileSystemElement {
     return children.remove(e);
   }
 
-  public FileSystemElement find(String name) {
-    for (FileSystemElement child : children) {
+  public FileSystemElement find(final String name) {
+    for (final FileSystemElement child : children) {
       if (child.getName().equals(name)) {
         return child;
       }
@@ -44,7 +44,7 @@ public class Directory extends FileSystemElement {
   }
 
   @Override
-  public FileSystemElement find(String[] pathParts) {
+  public FileSystemElement find(final String[] pathParts) {
     if (pathParts.length == 0)
       return this;
     if (getParent() == null && !pathParts[0].equals(""))
@@ -54,8 +54,8 @@ public class Directory extends FileSystemElement {
     if (pathParts.length == 1)
       return this;
 
-    for (FileSystemElement child : children) {
-      FileSystemElement found =
+    for (final FileSystemElement child : children) {
+      final FileSystemElement found =
           child.find(Arrays.copyOfRange(pathParts, 1, pathParts.length));
       if (found != null)
         return found;
@@ -69,18 +69,18 @@ public class Directory extends FileSystemElement {
       System.out.println("Empty directory");
       return;
     }
-    for (FileSystemElement child : children) {
+    for (final FileSystemElement child : children) {
       if (child instanceof Directory)
         System.out.println(child);
     }
-    for (FileSystemElement child : children) {
+    for (final FileSystemElement child : children) {
       if (child instanceof File)
         System.out.println(child);
     }
   }
 
-  public void delete(String name) {
-    FileSystemElement child = find(name);
+  public void delete(final String name) {
+    final FileSystemElement child = find(name);
     if (child != null) {
       if (child instanceof Directory)
         System.out.println("Deleting directory " + child);
@@ -93,8 +93,8 @@ public class Directory extends FileSystemElement {
   }
 
   public void delete() {
-    List<FileSystemElement> childrenCopy = new ArrayList<>(children);
-    for (FileSystemElement child : childrenCopy) {
+    final List<FileSystemElement> childrenCopy = new ArrayList<>(children);
+    for (final FileSystemElement child : childrenCopy) {
       child.delete();
     }
     super.delete();
@@ -106,12 +106,12 @@ public class Directory extends FileSystemElement {
   }
 
   @Override
-  public FileSystemElement recFind(String name) {
+  public FileSystemElement recFind(final String name) {
     if (getName().equals(name)) {
       return this;
     }
-    for (FileSystemElement child : children) {
-      FileSystemElement found = child.recFind(name);
+    for (final FileSystemElement child : children) {
+      final FileSystemElement found = child.recFind(name);
       if (found != null) {
         return found;
       }
@@ -120,9 +120,9 @@ public class Directory extends FileSystemElement {
   }
 
   @Override
-  public void printTree(int level) {
+  public void printTree(final int level) {
     super.printTree(level);
-    for (FileSystemElement child : children) {
+    for (final FileSystemElement child : children) {
       child.printTree(level + 1);
     }
   }
