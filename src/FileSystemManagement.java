@@ -105,7 +105,12 @@ public class FileSystemManagement {
     fs.printCurrentPath();
     System.out.print("Enter name: ");
     String name = System.console().readLine();
-    fs.delete(name);
+    try {
+      fs.delete(name);
+      System.out.println("Deleted " + name);
+    } catch (IllegalArgumentException e) {
+      System.out.println("Invalid name");
+    }
   }
 
   private void moveFileOrDirectory() {
@@ -115,8 +120,12 @@ public class FileSystemManagement {
     String name = System.console().readLine();
     System.out.print("Enter new parent directory path: ");
     String path = System.console().readLine();
-    fs.move(name, path);
-    System.out.println("Moved " + name + " to " + path);
+    try {
+      fs.move(name, path);
+      System.out.println("Moved " + name + " to " + path);
+    } catch (IllegalArgumentException e) {
+      System.out.println("Invalid name or path");
+    }
   }
 
   private void searchFileOrDirectory() {

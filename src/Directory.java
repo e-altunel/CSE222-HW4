@@ -87,11 +87,14 @@ public class Directory extends FileSystemElement {
       else if (child instanceof File)
         System.out.println("Deleting file " + child);
       child.delete();
+    } else {
+      throw new IllegalArgumentException("Element not found");
     }
   }
 
   public void delete() {
-    for (FileSystemElement child : children) {
+    List<FileSystemElement> childrenCopy = new ArrayList<>(children);
+    for (FileSystemElement child : childrenCopy) {
       child.delete();
     }
     super.delete();
